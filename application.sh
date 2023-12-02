@@ -71,7 +71,7 @@ RUNNING=$(docker inspect --format="{{.State.Running}}" postgres${PG_VERSION//.}_
 if [ $? -eq 1 ]; then
   echo "Dababase container does not exist."
   echo "Create Database container"
-    docker-compose \
+    docker compose \
         -f "$BASE_DIR/database.yml" \
         -f "$BASE_DIR/database.volume.yml" \
         -p postgres${PG_VERSION}  \
@@ -82,7 +82,7 @@ if [ "$RUNNING" == "false" ];
 then
 echo "CRITICAL - postgres${PG_VERSION//.}_db_1 is not running."
 echo "Starting Database"
-docker-compose \
+docker compose \
     -f "$BASE_DIR/database.yml" \
     -f "$BASE_DIR/database.volume.yml" \
     -p postgres${PG_VERSION}  \
@@ -91,7 +91,7 @@ fi
 
 if [ "$RUNNING" == "true" ];
 then
-   docker-compose \
+   docker compose \
         -f "$BASE_DIR/database.yml" \
         -f "$BASE_DIR/database.volume.yml" \
         -p postgres${PG_VERSION} \
@@ -130,7 +130,7 @@ then
 
     # Execute docker-compose
     echo
-    docker-compose \
+    docker compose \
             -f "$BASE_DIR/adempiere.yml" \
             -p "$COMPOSE_PROJECT_NAME" \
             $2 \
